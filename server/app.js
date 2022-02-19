@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 import eventsRouter from './router/eventsRouter.js';
+import { connectDB } from './database/db.js';
 
 dotenv.config();
 
@@ -29,4 +30,6 @@ app.use((err, req, res, next) => {
   res.status(500);
 });
 const port = 8080;
-app.listen(port, () => console.log(`server listening on ${port}`));
+
+connectDB().then(() => console.log('init yayyyy'));
+app.listen(port, () => console.log('server running on 8080'));

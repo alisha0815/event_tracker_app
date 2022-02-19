@@ -16,6 +16,12 @@ export async function getAllEvents() {
 }
 
 //  post Event
-export async function postOneEvent(event) {
-  return new Event(event).save().then((data) => console.log(data));
+export async function postOneEvent(title, venue, date) {
+  return new Event({
+    title,
+    venue,
+    date,
+  })
+    .save()
+    .then((data) => console.log(data));
 }
