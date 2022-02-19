@@ -2,6 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
+import eventsRouter from './router/eventsRouter.js';
+
 dotenv.config();
 
 const app = express();
@@ -11,15 +13,8 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('tiny'));
 
-app.get('/events/:id', (req, res) => {
-  console.log(req.params.id);
-  console.log(req.query);
-  res.send('hei');
-});
-
-app.post('/', (req, res, next) => {
-  console.log(req.body);
-});
+app.get('/events', eventsRouter);
+app.post('/events', eventsRouter);
 // const port = process.env.PORT || 8080;
 
 // error handling
