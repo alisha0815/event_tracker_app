@@ -1,12 +1,37 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
+import morgan from 'morgan';
 dotenv.config();
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Welcome');
+// req.body를 읽기 위해서 json으로 파싱해주는 미들웨어 연결
+app.use(cors());
+app.use(express.json());
+app.use(morgan('tiny'));
+
+app.get('/events/:id', (req, res) => {
+  console.log(req.params.id);
+  console.log(req.query);
+  res.send('hei');
+});
+
+app.post('/', (req, res, next) => {
+  console.log(req.body);
 });
 // const port = process.env.PORT || 8080;
+
+// error handling
+//잘못된 경로로 들어갔을때 에러 처리 *404
+app.use((req, res, next) => {
+  res.status(404);
+});
+
+//에러가 있을시 에러 처리 *처리코드 500
+app.use((err, req, res, next) => {
+  console.error(error);
+  res.status(500);
+});
 const port = 8080;
 app.listen(port, () => console.log(`server listening on ${port}`));
