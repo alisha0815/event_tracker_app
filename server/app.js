@@ -13,8 +13,8 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('tiny'));
 
-app.get('/events', eventsRouter);
-app.post('/events', eventsRouter);
+app.use('/events', eventsRouter);
+// app.post('/', eventsRouter);
 // const port = process.env.PORT || 8080;
 
 // error handling
