@@ -1,8 +1,9 @@
 import express from 'express';
-import { postOneEvent } from '../model/eventData.js';
+import { getAllEvents, postOneEvent } from '../model/eventData.js';
 
-export function getEvents(req, res) {
-  const event = { title: 'alisha', venue: 'hey', date: Date.now() };
+export async function getEvents(req, res) {
+  const event = await getAllEvents();
+  console.log(event);
   res.status(200).json(event);
 }
 

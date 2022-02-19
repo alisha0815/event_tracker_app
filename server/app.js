@@ -31,5 +31,9 @@ app.use((err, req, res, next) => {
 });
 const port = 8080;
 
-connectDB().then(() => console.log('init yayyyy'));
-app.listen(port, () => console.log('server running on 8080'));
+connectDB()
+  .then(() => {
+    console.log('init yayyyy');
+    app.listen(port, () => console.log('server running on 8080'));
+  })
+  .catch(console.error);

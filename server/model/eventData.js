@@ -23,5 +23,5 @@ export async function postOneEvent(title, venue, date) {
     date,
   })
     .save()
-    .then((data) => console.log(data));
+    .then((data) => console.log('post data===>', data));
 }
