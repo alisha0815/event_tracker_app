@@ -16,9 +16,8 @@ function App() {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({
-        title: 'Big storm in London',
+        title: 'another try',
         venue: 'Det går bra🚀🚀🤡',
-        date: '2016-10-29T18:00:00.000Z',
       }),
     })
       .then((res) => res.json())

@@ -1,10 +1,22 @@
 import React from 'react';
+import EventList from './eventList';
 
 const EventForm = ({ event, setEvent, events, setEvents, inputHandler }) => {
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const { title, date, venue } = e.target;
+    setEvents([
+      { title: title.value, date: date.value, venue: venue.value },
+      ...events,
+    ]);
+    setEvent({ title: '', date: '', venue: '' });
+    console.log('events====>', events);
+  };
+
   return (
     <>
       <h2>Create new event</h2>
-      <form>
+      <form onSubmit={submitHandler}>
         <label htmlFor="title">Title</label>
         <input
           name="title"
@@ -15,8 +27,8 @@ const EventForm = ({ event, setEvent, events, setEvents, inputHandler }) => {
         <label htmlFor="date">date</label>
         <input
           name="date"
-          type="date"
-          value={event.date}
+          type="text"
+          value={event.date || Date.now()}
           onChange={inputHandler}
         />
 
@@ -29,6 +41,7 @@ const EventForm = ({ event, setEvent, events, setEvents, inputHandler }) => {
         />
         <button type="submit">Create</button>
       </form>
+      <EventList key={event.id} evnets={events} />
     </>
   );
 };

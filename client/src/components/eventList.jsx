@@ -1,5 +1,12 @@
 import React from 'react';
 
-const EventList = () => <h2>Event list goes here</h2>;
+const EventList = ({ events }) => {
+  return (
+    <>
+      <h2>Event list</h2>
+      {/* <ul>{events.map((item) => console.log)}</ul> */}
+    </>
+  );
+};
 
 export default EventList;
