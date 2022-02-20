@@ -15,10 +15,11 @@ const EventForm = ({ event, setEvent, events, setEvents, inputHandler }) => {
         <label htmlFor="date">date</label>
         <input
           name="date"
-          type="text"
+          type="date"
           value={event.date}
           onChange={inputHandler}
         />
+
         <label htmlFor="venue">venue</label>
         <input
           name="venue"
