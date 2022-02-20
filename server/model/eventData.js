@@ -4,7 +4,7 @@ import Mongoose from 'mongoose';
 const eventSchema = new Mongoose.Schema({
   title: { type: String, required: true },
   venue: { type: String, required: true },
-  Date: { type: Date, default: Date.now },
+  date: { type: Date, default: Date.now() },
 });
 
 // Model

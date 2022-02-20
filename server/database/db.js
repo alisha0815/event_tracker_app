@@ -4,9 +4,6 @@ dotenv.config();
 
 const { DB_MONGO_HOST } = process.env;
 
-export async function connectDB() {
-  return new Mongoose.connect(DB_MONGO_HOST, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }); //
+export function connectDB() {
+  return new Mongoose.connect(DB_MONGO_HOST); //
 }
