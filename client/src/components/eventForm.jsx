@@ -27,7 +27,7 @@ const EventForm = ({ event, setEvent, events, setEvents, inputHandler }) => {
         <label htmlFor="date">date</label>
         <input
           name="date"
-          type="text"
+          type="datetime-local"
           value={event.date || Date.now()}
           onChange={inputHandler}
         />
