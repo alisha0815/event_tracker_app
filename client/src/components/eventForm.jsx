@@ -2,10 +2,10 @@ import React from 'react';
 import EventService from '../service/eventService';
 
 const EventForm = ({ event, setEvent, events, setEvents, inputHandler }) => {
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const { title, date, venue } = e.target;
-    const newEvent = EventService.callEvents(
+    const newEvent = await EventService.createEvent(
       title.value,
       date.value,
       venue.value
