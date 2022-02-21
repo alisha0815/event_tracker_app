@@ -13,14 +13,16 @@ function App() {
 
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  // setEvents([
-  //   ...events.slice().sort((a, b) => new Date(a.date) - new Date(b.date)),
-  // ]);
+
   useEffect(() => {
     EventService.callEvents()
       .then((events) =>
         setEvents([
-          ...events.slice().sort((a, b) => new Date(a.date) - new Date(b.date)),
+          ...events
+            .slice()
+            .sort(
+              (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+            ),
         ])
       )
       .catch((err) => console.error(err));

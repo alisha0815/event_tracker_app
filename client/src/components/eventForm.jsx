@@ -22,7 +22,11 @@ const EventForm = ({
     );
     setEvents([newEvent, ...events]);
     setEvents([
-      ...events.slice().sort((a, b) => new Date(a.date) - new Date(b.date)),
+      ...events
+        .slice()
+        .sort(
+          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+        ),
     ]);
     setIsLoading(false);
     setEvent({ title: '', date: '', venue: '' });
@@ -43,7 +47,7 @@ const EventForm = ({
         <input
           name="date"
           type="datetime-local"
-          value={event.date || Date.now()}
+          value={event.date}
           onChange={inputHandler}
         />
 
