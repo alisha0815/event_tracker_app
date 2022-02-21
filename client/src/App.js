@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+
 // import styled from 'styled-components';
 import EventForm from './components/eventForm';
 import EventList from './components/eventList';
+import EventService from './service/eventService';
 
 function App() {
   const [event, setEvent] = useState({
@@ -13,17 +15,9 @@ function App() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/events', {
-      method: 'POST',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify({
-        title: 'another try',
-        venue: 'Det går bra🚀🚀🤡',
-      }),
-    })
-      .then((res) => res.json())
-      .then(console.log)
-      .catch((e) => console.log(e));
+    EventService.callEvents()
+      .then((events) => setEvents([...events]))
+      .catch((err) => console.err(err));
   }, []);
 
   const inputHandler = (e) => {

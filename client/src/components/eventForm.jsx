@@ -1,16 +1,17 @@
 import React from 'react';
-import EventList from './eventList';
+import EventService from '../service/eventService';
 
 const EventForm = ({ event, setEvent, events, setEvents, inputHandler }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     const { title, date, venue } = e.target;
-    setEvents([
-      { title: title.value, date: date.value, venue: venue.value },
-      ...events,
-    ]);
+    const newEvent = EventService.callEvents(
+      title.value,
+      date.value,
+      venue.value
+    );
+    setEvents([newEvent, ...events]);
     setEvent({ title: '', date: '', venue: '' });
-    console.log('events====>', events);
   };
 
   return (
