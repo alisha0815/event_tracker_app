@@ -13,6 +13,7 @@ const EventForm = ({
 }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const { title, date, venue } = e.target;
     const newEvent = await EventService.createEvent(
       title.value,
@@ -20,8 +21,11 @@ const EventForm = ({
       venue.value
     );
     setEvents([newEvent, ...events]);
-    setEvent({ title: '', date: '', venue: '' });
+    setEvents([
+      ...events.slice().sort((a, b) => new Date(a.date) - new Date(b.date)),
+    ]);
     setIsLoading(false);
+    setEvent({ title: '', date: '', venue: '' });
   };
 
   return (
@@ -53,11 +57,7 @@ const EventForm = ({
         <button type="submit">Create</button>
       </form>
       <div>
-        {isLoading ? (
-          <h2>Loading.....</h2>
-        ) : (
-          <EventList event={event} events={events} />
-        )}
+        <EventList event={event} events={events} isLoading={isLoading} />
       </div>
     </>
   );

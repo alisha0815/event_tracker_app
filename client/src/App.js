@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 // import styled from 'styled-components';
 import EventForm from './components/eventForm';
-import EventList from './components/eventList';
 import EventService from './service/eventService';
 
 function App() {
@@ -13,12 +12,18 @@ function App() {
   });
 
   const [events, setEvents] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
+  const [isLoading, setIsLoading] = useState(false);
+  // setEvents([
+  //   ...events.slice().sort((a, b) => new Date(a.date) - new Date(b.date)),
+  // ]);
   useEffect(() => {
     EventService.callEvents()
-      .then((events) => setEvents([...events]))
-      .catch((err) => console.err(err));
+      .then((events) =>
+        setEvents([
+          ...events.slice().sort((a, b) => new Date(a.date) - new Date(b.date)),
+        ])
+      )
+      .catch((err) => console.error(err));
   }, []);
 
   const inputHandler = (e) => {
