@@ -1,7 +1,16 @@
 import React from 'react';
 import EventService from '../service/eventService';
+import EventList from './eventList';
 
-const EventForm = ({ event, setEvent, events, setEvents, inputHandler }) => {
+const EventForm = ({
+  event,
+  setEvent,
+  events,
+  setEvents,
+  inputHandler,
+  isLoading,
+  setIsLoading,
+}) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const { title, date, venue } = e.target;
@@ -12,6 +21,7 @@ const EventForm = ({ event, setEvent, events, setEvents, inputHandler }) => {
     );
     setEvents([newEvent, ...events]);
     setEvent({ title: '', date: '', venue: '' });
+    setIsLoading(false);
   };
 
   return (
@@ -42,6 +52,13 @@ const EventForm = ({ event, setEvent, events, setEvents, inputHandler }) => {
         />
         <button type="submit">Create</button>
       </form>
+      <div>
+        {isLoading ? (
+          <h2>Loading.....</h2>
+        ) : (
+          <EventList event={event} events={events} />
+        )}
+      </div>
     </>
   );
 };

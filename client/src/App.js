@@ -13,6 +13,7 @@ function App() {
   });
 
   const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     EventService.callEvents()
@@ -32,14 +33,17 @@ function App() {
   return (
     <>
       <nav>Codeworks Evening</nav>
-      <EventForm
-        event={event}
-        setEvent={setEvent}
-        events={events}
-        setEvents={setEvents}
-        inputHandler={inputHandler}
-      />
-      <EventList event={event} events={events} />
+      <div>
+        <EventForm
+          event={event}
+          setEvent={setEvent}
+          events={events}
+          setEvents={setEvents}
+          inputHandler={inputHandler}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
+      </div>
     </>
   );
 }
