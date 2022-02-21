@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const EventList = ({ events, isLoading }) => {
   const upcomingEvent = events.find(
