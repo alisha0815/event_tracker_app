@@ -2,10 +2,18 @@ import React from 'react';
 
 const EventList = ({ events }) => {
   return (
-    <>
-      <h2>Event list</h2>
-      {/* <ul>{events.map((item) => console.log)}</ul> */}
-    </>
+    <div>
+      <h2>Event</h2>
+      <ul>
+        {events.map((item) => (
+          <div key={item.id}>
+            <p>{item.title}</p>
+            <p>{item.date}</p>
+            <p>{item.venue}</p>
+          </div>
+        ))}
+      </ul>
+    </div>
   );
 };
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 // import styled from 'styled-components';
 import EventForm from './components/eventForm';
+import EventList from './components/eventList';
 
 function App() {
   const [event, setEvent] = useState({
@@ -44,6 +45,7 @@ function App() {
         setEvents={setEvents}
         inputHandler={inputHandler}
       />
+      <EventList event={event} events={events} />
     </>
   );
 }

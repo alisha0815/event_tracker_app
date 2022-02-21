@@ -41,7 +41,6 @@ const EventForm = ({ event, setEvent, events, setEvents, inputHandler }) => {
         />
         <button type="submit">Create</button>
       </form>
-      <EventList key={event.id} evnets={events} />
     </>
   );
 };
