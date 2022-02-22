@@ -1,4 +1,5 @@
-import Mongoose from 'mongoose';
+import Mongoose from "mongoose";
+import { useVirtualId } from "../database/db.js";
 
 // Schema
 const eventSchema = new Mongoose.Schema({
@@ -8,7 +9,7 @@ const eventSchema = new Mongoose.Schema({
 });
 
 // Model
-const Event = Mongoose.model('Event', eventSchema);
+const Event = Mongoose.model("Event", eventSchema);
 
 // get Events
 export async function getAllEvents() {
@@ -21,7 +22,13 @@ export async function postOneEvent(title, venue, date) {
     title,
     venue,
     date,
-  })
-    .save()
-    .then((data) => console.log('post data===>', data));
+  }).save();
 }
+
+// delete Event
+export async function removeOneEvent(id) {
+  return Event.findByIdAndDelete(id);
+}
+
+// convert virtual id to string
+useVirtualId(eventSchema);

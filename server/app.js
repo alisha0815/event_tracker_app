@@ -21,7 +21,7 @@ app.use('/events', eventsRouter);
 // error handling
 //잘못된 경로로 들어갔을때 에러 처리 *404
 app.use((req, res, next) => {
-  res.status(404);
+  res.status(404).send({ message: 'pile path is not correct' });
 });
 
 //에러가 있을시 에러 처리 *처리코드 500
