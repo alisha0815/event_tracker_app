@@ -1,6 +1,7 @@
 import React from "react";
+import EventService from "../service/eventService";
 
-const EventList = ({ events, isLoading }) => {
+const EventList = ({ events, isLoading, setEvents }) => {
   const upcomingEvent = events.find(
     (eventItem) =>
       new Date(eventItem.date).getTime() >= Date.now() &&
@@ -11,7 +12,11 @@ const EventList = ({ events, isLoading }) => {
     (eventItem) => eventItem !== upcomingEvent
   );
 
-  console.log({ upcomingEvent, theRestEvents, events });
+  const deleteHandler = (id) => {
+    EventService.deleteEvent(id).then(() =>
+      setEvents(events.filter((eventItem) => eventItem.id !== id))
+    );
+  };
 
   return (
     <div>
@@ -27,6 +32,9 @@ const EventList = ({ events, isLoading }) => {
                 <li>{upcomingEvent.title}</li>
                 <li>{upcomingEvent.date}</li>
                 <li>{upcomingEvent.venue}</li>
+                <button onClick={() => deleteHandler(upcomingEvent.id)}>
+                  Delete
+                </button>
               </ul>
             </div>
             <div className="event-list">
@@ -36,6 +44,12 @@ const EventList = ({ events, isLoading }) => {
                   <li>{evenItem.title}</li>
                   <li>{evenItem.date}</li>
                   <li>{evenItem.venue}</li>
+                  <button
+                    data-confirm="Are you sure to delete this item?"
+                    onClick={() => deleteHandler(evenItem.id)}
+                  >
+                    Delete
+                  </button>
                 </ul>
               ))}
             </div>
